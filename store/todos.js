@@ -33,6 +33,9 @@ export const mutations = {
   },
   createTodo (state, todo) {
     state.list.push(todo)
+  },
+  removeTodo (state, index) {
+    state.list.splice(index, 1)
   }
 }
 
@@ -48,5 +51,8 @@ export const actions = {
   },
   createTodo ({ commit }, todo) {
     commit('createTodo', todo)
+  },
+  removeTodo ({ commit }, index) {
+    commit('removeTodo', index)
   }
 }

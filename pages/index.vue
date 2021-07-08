@@ -71,9 +71,6 @@
 
   .create-todo {
     &::v-deep .v-input__prepend-outer {
-      display: flex;
-      align-items: center;
-      margin: 0;
       padding-left: 0.6rem;
       height: 100%;
     }

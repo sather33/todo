@@ -4,6 +4,8 @@
       v-checkbox(:input-value="isCompleted", @change="handleCheck")
       .label-block
         .text {{ label }}
+    .end-block
+      v-icon.delete-icon(@click="handleDelete") mdi-delete
 </template>
 
 <script>
@@ -27,6 +29,7 @@
 
     methods: {
       ...mapActions({
+        removeTodo: 'todos/removeTodo',
         recoverTodo: 'todos/recoverTodo',
         completeTodo: 'todos/completeTodo'
       }),
@@ -36,6 +39,9 @@
         }
 
         this.completeTodo(this.index)
+      },
+      handleDelete () {
+        this.removeTodo(this.index)
       }
     }
   }
@@ -45,6 +51,7 @@
 .todo-item {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 6px;
   padding: 4px 24px;
   height: $todo-item-height;
@@ -57,6 +64,15 @@
 
   .text {
     color: $white;
+  }
+
+  .delete-icon {
+    color: $grey-light;
+    cursor: pointer;
+
+    &:hover {
+      color: $grey-lightest;
+    }
   }
 }
 </style>
