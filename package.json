@@ -9,15 +9,16 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/style-resources": "^1.2.0",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
     "vuetify": "^2.5.5"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.12.1",
-    "babel-eslint": "^10.1.0",
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/vuetify": "^1.12.1",
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.30.0",
     "eslint-plugin-nuxt": "^2.0.0",
     "node-sass": "^4.13.0",

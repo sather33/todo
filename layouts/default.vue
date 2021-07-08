@@ -1,12 +1,12 @@
 <template lang="pug">
   v-app(dark)
-    v-navigation-drawer(v-model="drawer", app, fixed, clipped, :mini-variant="miniVariant")
+    v-navigation-drawer(app, fixed, clipped, :mini-variant="miniVariant")
       v-list
         v-list-item(
-          exact
-          router
-          :to="item.to"
-          :key="item.title"
+          exact,
+          router,
+          :to="item.to",
+          :key="item.title",
           v-for="item in items")
           v-list-item-action
             v-icon {{ item.icon }}
@@ -19,8 +19,7 @@
       v-toolbar-title(v-text="title")
 
     v-main
-      v-container
-        Nuxt
+      nuxt
 
     v-footer(app, :absolute="!fixed")
       span &copy; {{ new Date().getFullYear() }}
