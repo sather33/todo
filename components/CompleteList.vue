@@ -20,5 +20,9 @@
 <style lang="scss" scoped>
 .complete-list {
   margin-top: 1rem;
+
+  .title {
+    margin-bottom: 0.5rem;
+  }
 }
 </style>
