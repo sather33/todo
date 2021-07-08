@@ -1,13 +1,15 @@
 <template lang="pug">
   v-row(justify="center", align="center")
     v-col(cols=12)
-      untodo-list
+      todo-list
+      complete-list
 </template>
 
 <script>
-  import UntodoList from '@/components/UntodoList'
+  import TodoList from '@/components/TodoList'
+  import CompleteList from '@/components/CompleteList'
 
   export default {
-    components: { UntodoList }
+    components: { TodoList, CompleteList }
   }
 </script>
