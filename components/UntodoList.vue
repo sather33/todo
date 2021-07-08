@@ -16,10 +16,21 @@
         return [
           {
             id: 1,
-            title: 'Test'
+            label: 'Test'
+          },
+          {
+            id: 2,
+            label: 'Test2',
+            description: 'test'
           }
         ]
       }
     }
   }
 </script>
+
+<style lang="scss" scoped>
+.untodo-list {
+  padding: $gap;
+}
+</style>

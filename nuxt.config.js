@@ -24,7 +24,7 @@ export default {
   ],
   styleResources: {
     scss: [
-      '~/assets/variables.scss'
+      '~/assets/sass/variables.scss'
     ]
   },
 
@@ -51,6 +51,7 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     theme: {
+      customVariables: ['~/assets/variables.scss'],
       dark: true,
       themes: {
         dark: {

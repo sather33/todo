@@ -1,0 +1,26 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+//
+// The variables you want to modify
+// $font-size-root: 20px;
+
+// Colors
+$black: hsl(0, 0%, 16%);
+$black-bis: hsl(0, 0%, 7%);
+$black-ter: hsl(0, 0%, 14%);
+
+$grey-darker: hsl(180, 2%, 12%);
+$grey-dark: hsl(180, 2%, 39%);
+$grey: hsl(180, 0%, 59%);
+$grey-light: hsl(0, 0%, 87%);
+$grey-lighter: hsl(0, 0%, 86%);
+$grey-lightest: hsl(150, 17%, 98%);
+
+$white-ter: hsl(210, 8%, 95%);
+$white-bis: hsl(0, 0%, 98%);
+$white: hsl(0, 0%, 100%);
+
+$gap: 16px;
+
+// TodoItem
+$todo-item-height: 44px;
+$todo-item-border-radius: 6px;
