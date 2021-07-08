@@ -15,9 +15,3 @@
     mixins: [todosMixins]
   }
 </script>
-
-<style lang="scss" scoped>
-.todo-list {
-  padding: $gap;
-}
-</style>

@@ -1,23 +1,5 @@
 export const state = () => ({
-  list: [
-    {
-      id: 2323,
-      label: 'Test',
-      isCompleted: false
-    },
-    {
-      id: 23213213,
-      label: 'Test2',
-      description: 'test',
-      isCompleted: false
-    },
-    {
-      id: 23423432,
-      label: 'Test2',
-      description: 'test',
-      isCompleted: true
-    }
-  ]
+  list: []
 })
 
 export const getters = {
@@ -48,6 +30,9 @@ export const mutations = {
   },
   recoverTodo (state, index) {
     state.list[index].isCompleted = false
+  },
+  createTodo (state, todo) {
+    state.list.push(todo)
   }
 }
 
@@ -60,5 +45,8 @@ export const actions = {
   },
   recoverTodo ({ commit }, index) {
     commit('recoverTodo', index)
+  },
+  createTodo ({ commit }, todo) {
+    commit('createTodo', todo)
   }
 }

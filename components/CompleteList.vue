@@ -1,5 +1,5 @@
 <template lang="pug">
-  .complete-list
+  .complete-list(v-if="completeList.length")
     .title Complete
     todo-item(
       :key="item.id",
@@ -19,6 +19,6 @@
 
 <style lang="scss" scoped>
 .complete-list {
-  padding: $gap;
+  margin-top: 1rem;
 }
 </style>
