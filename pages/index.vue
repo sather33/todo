@@ -5,13 +5,13 @@
         todo-list
         complete-list
     .footer-section
-      v-form(@submit.prevent="handleCrateTodo")
+      v-form(@submit.prevent="handleCreateTodo")
         v-text-field.create-todo(v-model="newTodo", solo, label="Create todo", prepend-icon="mdi-plus")
 </template>
 
 <script>
   import { v4 as uuidv4 } from 'uuid'
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   import TodoList from '@/components/TodoList'
   import CompleteList from '@/components/CompleteList'
 
@@ -24,20 +24,27 @@
       }
     },
 
+    computed: {
+      ...mapGetters({
+        currentCategoryId: 'category/currentCategoryId'
+      })
+    },
+
     methods: {
       ...mapActions({
         createTodo: 'todos/createTodo'
       }),
-      handleCrateTodo () {
+      handleCreateTodo () {
         const data = {
           id: uuidv4(),
           label: this.newTodo,
           description: '',
+          category: this.currentCategoryId,
           isCompleted: false
         }
 
         this.createTodo(data)
-        this.newTodo = null
+        this.newTodo = ''
       }
     }
   }
