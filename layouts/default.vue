@@ -1,21 +1,26 @@
 <template lang="pug">
-  v-app(dark)
-    v-navigation-drawer(app, fixed, clipped, :mini-variant="miniVariant")
-      v-list
-        v-list-item(
-          exact,
-          router,
-          :to="item.to",
-          :key="item.title",
-          v-for="item in items")
-          v-list-item-action
-            v-icon {{ item.icon }}
-          v-list-item-content
-            v-list-item-title(v-text="item.title")
+  v-app.main-app(dark)
+    v-navigation-drawer(v-model="drawer", app, fixed, clipped)
+      .navigation-main
+        v-list.navigation-top(dense, nav)
+          v-list-item-group(v-model="selectedItem", @change="hanldeClickCategory")
+            v-list-item(
+              :key="index",
+              v-for="(item, index) in items")
+              v-list-item-action
+                v-icon {{ item.icon }}
+              v-list-item-content
+                v-list-item-title(v-text="item.title")
+        v-list.navigation-bottom(nav, flat)
+          v-list-item-group
+            v-list-item.add-group-button
+              v-list-item-action
+                v-icon mdi-plus
+              v-list-item-content
+                v-list-item-title Create group
 
     v-app-bar(app, fixed, clipped-left)
-      v-btn(icon, @click.stop="handleVariant")
-        v-icon mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}
+      v-app-bar-nav-icon(@click.stop="drawer = !drawer")
       v-toolbar-title(v-text="title")
 
     v-main
@@ -30,7 +35,8 @@
     data () {
       return {
         fixed: false,
-        miniVariant: false,
+        drawer: true,
+        selectedItem: 0,
         title: 'TODO LIST'
       }
     },
@@ -40,8 +46,11 @@
         return [
           {
             icon: 'mdi-apps',
-            title: 'Welcome',
-            to: '/'
+            title: 'First note'
+          },
+          {
+            icon: 'mdi-apps',
+            title: 'Welcome2'
           }
         ]
       }
@@ -50,7 +59,27 @@
     methods: {
       handleVariant () {
         this.miniVariant = !this.miniVariant
+      },
+      hanldeClickCategory (value) {
+        console.log('hanldeClickCategory', value)
       }
     }
   }
 </script>
+
+<style lang="scss" scoped>
+.main-app {
+  .navigation-main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .navigation-top {
+    @include hide-scrollbar();
+
+    height: 100%;
+    overflow-y: scroll;
+  }
+}
+</style>
