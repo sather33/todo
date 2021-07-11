@@ -17,6 +17,18 @@ export default build(crud(), {
     },
     setCurrentCategoryId (state, categoryId) {
       state.currentCategoryId = categoryId
+    },
+    updateCategoryLabel (state, { id, label }) {
+      state.list = state.list.map((category) => {
+        if (category.id !== id) {
+          return category
+        }
+
+        return {
+          ...category,
+          label
+        }
+      })
     }
   },
   actions: {
@@ -38,6 +50,9 @@ export default build(crud(), {
     },
     removeCategory ({ commit }, id) {
       commit('removeDataFromList', id)
+    },
+    updateCategoryLabel ({ commit }, { id, label }) {
+      commit('updateCategoryLabel', { id, label })
     }
   }
 })

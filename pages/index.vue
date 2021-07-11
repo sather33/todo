@@ -2,7 +2,12 @@
   .index-page
     client-only
       .title-block
-        .title {{ categoryLabel }}
+        .title-edit-block
+          v-form.edit-form(v-if="isEdit", @submit.prevent="handleUpdateNewCategoryLabel")
+            v-text-field(:value="categoryLabel", @input="updateNewCategoryLabel")
+            v-btn.edit-save(color="primary", type="submit") Save
+          .title(v-else) {{ categoryLabel }}
+          v-icon.edit-icon(v-if="!isEdit", @click="isEdit = true") mdi-pencil
         v-btn(color="primary", @click="handleDeleteCategory") Delete
       .main-section
         todo-list
@@ -24,7 +29,9 @@
 
     data () {
       return {
-        newTodo: null
+        newTodo: null,
+        newCategoryLabel: null,
+        isEdit: false
       }
     },
 
@@ -52,7 +59,8 @@
       ...mapActions({
         createTodo: 'todos/createTodo',
         removeTodosByCategory: 'todos/removeTodosByCategory',
-        removeCategory: 'category/removeCategory'
+        removeCategory: 'category/removeCategory',
+        updateCategoryLabel: 'category/updateCategoryLabel'
       }),
       handleCreateTodo () {
         const data = {
@@ -75,6 +83,18 @@
           this.removeCategory(this.currentCategoryId)
           this.removeTodosByCategory(this.currentCategoryId)
         })
+      },
+      updateNewCategoryLabel (value) {
+        this.newCategoryLabel = value
+      },
+      handleUpdateNewCategoryLabel () {
+        if (!this.newCategoryLabel) {
+          return
+        }
+
+        this.updateCategoryLabel({ id: this.currentCategoryId, label: this.newCategoryLabel })
+        this.isEdit = false
+        this.newCategoryLabel = null
       }
     }
   }
@@ -126,6 +146,26 @@
     @include flex(space-between);
 
     margin-bottom: px2rem(12);
+  }
+
+  .title-edit-block {
+    @include flex;
+  }
+
+  .edit-icon {
+    margin-left: px2rem(12);
+    cursor: pointer;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  .edit-save {
+    margin-left: px2rem(8);
+  }
+  .edit-form {
+    @include flex;
   }
 }
 </style>
