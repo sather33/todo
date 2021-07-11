@@ -1,0 +1,20 @@
+steps:
+- name: 'gcr.io/cloud-builders/npm'
+  args:
+  - install
+- name: 'gcr.io/cloud-builders/npm'
+  args:
+  - run
+  - build
+  env:
+  - 'SITE_TITLE=${_SITE_TITLE}'
+  - 'SITE_DESCRIPTION=${_SITE_DESCRIPTION}'
+  - 'OG_TITLE=${_OG_TITLE}'
+  - 'OG_SITE_NAME=${_OG_SITE_NAME}'
+  - 'OG_DESCRIPTION=${_OG_DESCRIPTION}'
+  - 'API_BASE_URL=${_API_BASE_URL}'
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - app
+  - deploy
+timeout: '600s'

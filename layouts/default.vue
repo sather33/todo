@@ -13,7 +13,7 @@
       nuxt
 
     v-footer(app, absolute)
-      span &copy; {{ new Date().getFullYear() }}
+      span &copy; {{ new Date().getFullYear() }} power by Sather
 </template>
 
 <script>
@@ -30,7 +30,7 @@
     data () {
       return {
         drawer: false,
-        title: 'TODO LIST'
+        title: 'GLODEN TODO'
       }
     },
 
