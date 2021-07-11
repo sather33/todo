@@ -46,7 +46,7 @@
         fixed: false,
         drawer: true,
         isOpen: false,
-        isLoading: false,
+        isLoading: true,
         selectedItem: 1,
         title: 'TODO LIST'
       }
@@ -67,6 +67,10 @@
 
     mounted () {
       this.updateHook()
+
+      setTimeout(() => {
+        this.isLoading = false
+      }, 1000)
     },
 
     methods: {
