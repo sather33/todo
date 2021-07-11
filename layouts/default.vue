@@ -85,7 +85,7 @@
 
         setTimeout(() => {
           this.isLoading = false
-        }, 700)
+        }, 300)
       },
       openCreateGroupDialog () {
         this.isOpen = true
