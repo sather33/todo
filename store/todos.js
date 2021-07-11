@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import build from '~/libs/store/build'
 import crud from '~/libs/store/crud'
 
@@ -37,6 +38,15 @@ export default build(crud(), {
         ...todo,
         ...data
       }
+    },
+    removeTodosByCategory (state, categoryId) {
+      state.list = _.cloneDeep(state.list).filter((item) => {
+        if (item.category === categoryId) {
+          return false
+        }
+
+        return item
+      })
     }
   },
   actions: {
@@ -57,6 +67,9 @@ export default build(crud(), {
     },
     setData ({ commit }, todo) {
       commit('setData', todo)
+    },
+    removeTodosByCategory ({ commit }, categoryId) {
+      commit('removeTodosByCategory', categoryId)
     }
   }
 })

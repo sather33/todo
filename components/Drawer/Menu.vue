@@ -31,10 +31,17 @@
 
     mixins: [loadingMixins],
 
+    props: {
+      value: {
+        type: Boolean,
+        default: false
+      }
+    },
+
     data () {
       return {
+        drawer: this.value,
         isOpen: false,
-        drawer: true,
         selectedItem: 0
       }
     },
@@ -50,6 +57,19 @@
           label: category.label
         }))
       }
+    },
+
+    watch: {
+      value () {
+        this.drawer = this.value
+      },
+      drawer () {
+        this.$emit('update:value', this.drawer)
+      }
+    },
+
+    created () {
+      this.drawer = this.value
     },
 
     methods: {

@@ -1,6 +1,9 @@
 <template lang="pug">
   .index-page
     client-only
+      .title-block
+        .title {{ categoryLabel }}
+        v-btn(color="primary", @click="handleDeleteCategory") Delete
       .main-section
         todo-list
         complete-list
@@ -10,6 +13,7 @@
 </template>
 
 <script>
+  import _ from 'lodash'
   import { v4 as uuidv4 } from 'uuid'
   import { mapActions, mapGetters } from 'vuex'
   import TodoList from '@/components/TodoList'
@@ -26,13 +30,29 @@
 
     computed: {
       ...mapGetters({
+        categories: 'category/list',
         currentCategoryId: 'category/currentCategoryId'
-      })
+      }),
+      categoryLabel () {
+        return _.get(this.categoryGroupById, `${this.currentCategoryId}.label`, '')
+      },
+      categoryGroupById () {
+        return this.categories.reduce((carry, item, index) => {
+          carry[item.id] = {
+            index,
+            ...item
+          }
+
+          return carry
+        }, {})
+      }
     },
 
     methods: {
       ...mapActions({
-        createTodo: 'todos/createTodo'
+        createTodo: 'todos/createTodo',
+        removeTodosByCategory: 'todos/removeTodosByCategory',
+        removeCategory: 'category/removeCategory'
       }),
       handleCreateTodo () {
         const data = {
@@ -45,6 +65,16 @@
 
         this.createTodo(data)
         this.newTodo = ''
+      },
+      handleDeleteCategory () {
+        this.$confirm('Do you really want to delete "Category"?\nAll the todo will be delete.').then((res) => {
+          if (!res) {
+            return
+          }
+
+          this.removeCategory(this.currentCategoryId)
+          this.removeTodosByCategory(this.currentCategoryId)
+        })
       }
     }
   }
@@ -90,6 +120,12 @@
     &::v-deep .v-text-field__details {
       display: none;
     }
+  }
+
+  .title-block {
+    @include flex(space-between);
+
+    margin-bottom: px2rem(12);
   }
 }
 </style>

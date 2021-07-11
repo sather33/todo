@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-navigation-drawer.description-drawer(:value="showDescription", app, absolute, right, temporary, @input="handleDescription")
+  v-navigation-drawer.description-drawer(:value="showDescription", app, fixed, right, temporary, @input="handleDescription")
     .title {{ data.label }}
     v-form(@submit.prevent="handleUpdateTodo")
       v-textarea(no-resize, label="Description", rows="7", :value="data.description", @input="handleDescriptionChange")

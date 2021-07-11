@@ -1,10 +1,10 @@
 <template lang="pug">
   v-app.main-app(dark)
-    menu-drawer
+    menu-drawer(:value.sync="drawer")
     description-drawer
 
     v-app-bar(app, fixed, clipped-left)
-      v-app-bar-nav-icon(@click.stop="drawer = !drawer")
+      v-app-bar-nav-icon(@click="handleDrawer")
       v-toolbar-title(v-text="title")
 
     v-main
@@ -29,6 +29,7 @@
 
     data () {
       return {
+        drawer: false,
         title: 'TODO LIST'
       }
     },
@@ -44,7 +45,10 @@
     methods: {
       ...mapActions({
         updateHook: 'hook/updateHook'
-      })
+      }),
+      handleDrawer () {
+        this.drawer = !this.drawer
+      }
     }
   }
 </script>

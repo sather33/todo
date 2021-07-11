@@ -35,6 +35,9 @@ export default build(crud(), {
     },
     setCurrentCategoryId ({ commit }, categoryId) {
       commit('setCurrentCategoryId', categoryId)
+    },
+    removeCategory ({ commit }, id) {
+      commit('removeDataFromList', id)
     }
   }
 })
