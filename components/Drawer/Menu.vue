@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
   import loadingMixins from '@/mixins/loading'
   import CreateGroupDialog from '@/components/Dialog/CreateGroupDialog'
 
@@ -41,8 +41,7 @@
 
     computed: {
       ...mapGetters({
-        categories: 'category/list',
-        setCurrentCategoryIdByIndex: 'category/setCurrentCategoryIdByIndex'
+        categories: 'category/list'
       }),
       items () {
         return this.categories.map(category => ({
@@ -54,6 +53,9 @@
     },
 
     methods: {
+      ...mapActions({
+        setCurrentCategoryIdByIndex: 'category/setCurrentCategoryIdByIndex'
+      }),
       hanldeClickCategory (value) {
         this.startLoading()
         setTimeout(() => {
