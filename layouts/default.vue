@@ -24,6 +24,8 @@
       v-toolbar-title(v-text="title")
 
     v-main
+      v-overlay(absolute, :opacity="1", :value="isLoading")
+        v-progress-circular(indeterminate, color="primary")
       nuxt
 
     v-footer(app, :absolute="!fixed")
@@ -44,7 +46,8 @@
         fixed: false,
         drawer: true,
         isOpen: false,
-        selectedItem: 0,
+        isLoading: false,
+        selectedItem: 1,
         title: 'TODO LIST'
       }
     },
@@ -75,7 +78,14 @@
         this.miniVariant = !this.miniVariant
       },
       hanldeClickCategory (value) {
-        this.setCurrentCategoryIdByIndex(value)
+        this.isLoading = true
+        setTimeout(() => {
+          this.setCurrentCategoryIdByIndex(value)
+        }, 200)
+
+        setTimeout(() => {
+          this.isLoading = false
+        }, 700)
       },
       openCreateGroupDialog () {
         this.isOpen = true
