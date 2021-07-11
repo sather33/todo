@@ -4,6 +4,7 @@
       v-checkbox(:input-value="data.isCompleted", @change="handleCheck")
       .label-block(@click="handleShowDescrition")
         .text {{ data.label }}
+        .description {{ data.description }}
     .end-block
       v-icon.delete-icon(@click="handleDelete") mdi-delete
 </template>
@@ -75,12 +76,24 @@
   }
 
   .label-block {
+    position: relative;
     width: 100%;
     cursor: pointer;
   }
 
   .text {
     color: $white;
+    font-weight: 500;
+  }
+  .description {
+    @include absolute(auto, auto, 0, 0);
+    @include text-overflow(1);
+
+    color: $grey-light;
+    line-height: 1;
+    white-space: pre-wrap;
+    font-size: px2rem(14);
+    transform: translateY(100%);
   }
 
   .delete-icon {
