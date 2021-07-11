@@ -1,49 +1,40 @@
 import _ from 'lodash'
+import build from '~/libs/store/build'
+import crud from '~/libs/store/crud'
 
-export const state = () => ({
-  currentCategoryId: '',
-  list: []
-})
-
-export const getters = {
-  list (state) {
-    return state.list
+export default build(crud(), {
+  state: {
+    currentCategoryId: ''
   },
-  currentCategoryId (state) {
-    return state.currentCategoryId
-  }
-}
-
-export const mutations = {
-  setList (state, list) {
-    state.list = list
-  },
-  addCategory (state, category) {
-    state.list.push(category)
-  },
-  setCurrentCategoryId (state, categoryId) {
-    state.currentCategoryId = categoryId
-  }
-}
-
-export const actions = {
-  setList ({ commit }, list) {
-    commit('setList', list)
-  },
-  addCategory ({ commit }, category) {
-    commit('addCategory', category)
-    commit('setCurrentCategoryId', category.id)
-  },
-  setCurrentCategoryIdByIndex ({ commit, getters }, index) {
-    const id = _.get(getters, `list.${index}.id`, null)
-
-    if (!id) {
-      return
+  getters: {
+    currentCategoryId (state) {
+      return state.currentCategoryId
     }
-
-    commit('setCurrentCategoryId', id)
   },
-  setCurrentCategoryId ({ commit }, categoryId) {
-    commit('setCurrentCategoryId', categoryId)
+  mutations: {
+    addCategory (state, category) {
+      state.list.push(category)
+    },
+    setCurrentCategoryId (state, categoryId) {
+      state.currentCategoryId = categoryId
+    }
+  },
+  actions: {
+    addCategory ({ commit }, category) {
+      commit('addCategory', category)
+      commit('setCurrentCategoryId', category.id)
+    },
+    setCurrentCategoryIdByIndex ({ commit, getters }, index) {
+      const id = _.get(getters, `list.${index}.id`, null)
+
+      if (!id) {
+        return
+      }
+
+      commit('setCurrentCategoryId', id)
+    },
+    setCurrentCategoryId ({ commit }, categoryId) {
+      commit('setCurrentCategoryId', categoryId)
+    }
   }
-}
+})

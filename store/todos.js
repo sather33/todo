@@ -1,58 +1,47 @@
-export const state = () => ({
-  list: []
+import build from '~/libs/store/build'
+import crud from '~/libs/store/crud'
+
+const transList = (item, index) => ({
+  ...item,
+  index
 })
 
-export const getters = {
-  list (state) {
-    return state.list.map((item, index) => ({
-      ...item,
-      index
-    }))
-  },
-  listGroupById (state) {
-    return state.list.reduce((carry, item, index) => {
-      carry[item.id] = {
-        index,
-        ...item
-      }
+export default build(crud(transList), {
+  getters: {
+    listGroupById (state) {
+      return state.list.reduce((carry, item, index) => {
+        carry[item.id] = {
+          index,
+          ...item
+        }
 
-      return carry
-    }, {})
+        return carry
+      }, {})
+    }
+  },
+  mutations: {
+    completeTodo (state, index) {
+      state.list[index].isCompleted = true
+    },
+    recoverTodo (state, index) {
+      state.list[index].isCompleted = false
+    },
+    removeTodo (state, index) {
+      state.list.splice(index, 1)
+    }
+  },
+  actions: {
+    completeTodo ({ commit }, index) {
+      commit('completeTodo', index)
+    },
+    recoverTodo ({ commit }, index) {
+      commit('recoverTodo', index)
+    },
+    createTodo ({ commit }, todo) {
+      commit('appendToList', todo)
+    },
+    removeTodo ({ commit }, index) {
+      commit('removeTodo', index)
+    }
   }
-}
-
-export const mutations = {
-  setList (state, list) {
-    state.list = list
-  },
-  completeTodo (state, index) {
-    state.list[index].isCompleted = true
-  },
-  recoverTodo (state, index) {
-    state.list[index].isCompleted = false
-  },
-  createTodo (state, todo) {
-    state.list.push(todo)
-  },
-  removeTodo (state, index) {
-    state.list.splice(index, 1)
-  }
-}
-
-export const actions = {
-  setList ({ commit }, list) {
-    commit('setList', list)
-  },
-  completeTodo ({ commit }, index) {
-    commit('completeTodo', index)
-  },
-  recoverTodo ({ commit }, index) {
-    commit('recoverTodo', index)
-  },
-  createTodo ({ commit }, todo) {
-    commit('createTodo', todo)
-  },
-  removeTodo ({ commit }, index) {
-    commit('removeTodo', index)
-  }
-}
+})
