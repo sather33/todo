@@ -41,7 +41,12 @@
         this.completeTodo(this.index)
       },
       handleDelete () {
-        this.removeTodo(this.index)
+        this.$confirm('Do you really want to delete?').then((res) => {
+          if (!res) {
+            return
+          }
+          this.removeTodo(this.index)
+        })
       }
     }
   }
@@ -71,7 +76,7 @@
     cursor: pointer;
 
     &:hover {
-      color: $grey-lightest;
+      color: $red;
     }
   }
 }
