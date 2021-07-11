@@ -1,9 +1,9 @@
 <template lang="pug">
   .todo-item
     v-row.check-block(align="center")
-      v-checkbox(:input-value="isCompleted", @change="handleCheck")
-      .label-block
-        .text {{ label }}
+      v-checkbox(:input-value="data.isCompleted", @change="handleCheck")
+      .label-block(@click="handleShowDescrition")
+        .text {{ data.label }}
     .end-block
       v-icon.delete-icon(@click="handleDelete") mdi-delete
 </template>
@@ -13,22 +13,25 @@
 
   export default {
     props: {
-      label: {
-        type: String,
-        default: ''
-      },
-      isCompleted: {
-        type: Boolean,
-        default: false
-      },
-      index: {
-        type: Number,
-        default: 0
+      data: {
+        type: Object,
+        default: () => {}
       }
+    },
+
+    computed: {
+      index () {
+        return this.data.index
+      }
+    },
+
+    mounted () {
+      console.log('this.data', this.data)
     },
 
     methods: {
       ...mapActions({
+        setData: 'todos/setData',
         removeTodo: 'todos/removeTodo',
         recoverTodo: 'todos/recoverTodo',
         completeTodo: 'todos/completeTodo'
@@ -47,6 +50,9 @@
           }
           this.removeTodo(this.index)
         })
+      },
+      handleShowDescrition () {
+        this.setData(this.data)
       }
     }
   }
@@ -54,9 +60,8 @@
 
 <style lang="scss" scoped>
 .todo-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include flex(space-between);
+
   margin-bottom: 6px;
   padding: 4px 24px;
   height: $todo-item-height;
@@ -65,6 +70,17 @@
 
   &:last-of-type {
     margin-bottom: 0;
+  }
+
+  .check-block {
+    @include flex(flex-start);
+
+    flex-wrap: nowrap;
+  }
+
+  .label-block {
+    width: 100%;
+    cursor: pointer;
   }
 
   .text {

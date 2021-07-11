@@ -17,6 +17,9 @@ export default build(crud(transList), {
 
         return carry
       }, {})
+    },
+    showDescription (state) {
+      return !!Object.keys(state.data).length
     }
   },
   mutations: {
@@ -42,6 +45,9 @@ export default build(crud(transList), {
     },
     removeTodo ({ commit }, index) {
       commit('removeTodo', index)
+    },
+    setData ({ commit }, todo) {
+      commit('setData', todo)
     }
   }
 })

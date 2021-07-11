@@ -68,6 +68,9 @@ export default (transform) => {
     actions: {
       resetList ({ commit }) {
         commit('setList', [])
+      },
+      resetData ({ commit }) {
+        commit('setData', {})
       }
     }
   }

@@ -3,8 +3,8 @@
     .title Complete
     transition-group(name="slide-fade")
       todo-item(
+        :data="item",
         :key="item.id",
-        v-bind="item",
         v-for="item in completeList")
 </template>
 

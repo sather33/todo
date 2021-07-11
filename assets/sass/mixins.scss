@@ -1,8 +1,102 @@
-@mixin hide-scrollbar() {
+@mixin filled-image($image: false, $x: center, $y: center) {
+  @if $image {
+    background-image: url(#{$image});
+  }
+
+  background-repeat: no-repeat;
+  background-position: $x $y;
+  background-size: cover;
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin flex($cross-axis: center, $main-axis: center) {
+  display: flex;
+  align-items: $main-axis;
+  justify-content: $cross-axis;
+}
+
+@mixin inline-flex($cross-axis: center, $main-axis: center) {
+  display: inline-flex;
+  align-items: $main-axis;
+  justify-content: $cross-axis;
+}
+
+@mixin transition($properties...) {
+  transition-property: $properties;
+  transition-duration: $fast;
+  transition-timing-function: ease-out;
+}
+
+@mixin padding-x($padding) {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+@mixin padding-y($padding) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
+@mixin margin-x($margin) {
+  margin-left: $margin;
+  margin-right: $margin;
+}
+
+@mixin margin-y($margin) {
+  margin-top: $margin;
+  margin-bottom: $margin;
+}
+
+@mixin text-overflow($line: 1) {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin absolute($top: 0, $right: 0, $bottom: 0, $left: 0) {
+  position: absolute;
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  right: $right;
+}
+
+@mixin fixed($top: 0, $right: 0, $bottom: 0, $left: 0) {
+  position: fixed;
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  right: $right;
+}
+
+@mixin hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+@mixin sticky {
+  position: sticky;
+  z-index: $navbar-z - 1;
+}
+
+@mixin sticky-to-top($top: 0) {
+  @include sticky;
+
+  top: $top;
+}
+
+@mixin sticky-to-bottom($bottom: 0) {
+  @include sticky;
+
+  bottom: $bottom;
 }
