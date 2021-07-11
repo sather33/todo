@@ -1,15 +1,10 @@
 import build from '~/libs/store/build'
 import crud from '~/libs/store/crud'
 
-const transList = (item, index) => ({
-  ...item,
-  index
-})
-
-export default build(crud(transList), {
+export default build(crud(), {
   getters: {
-    listGroupById (state) {
-      return state.list.reduce((carry, item, index) => {
+    listGroupById ({ list }) {
+      return list.reduce((carry, item, index) => {
         carry[item.id] = {
           index,
           ...item
@@ -31,6 +26,17 @@ export default build(crud(transList), {
     },
     removeTodo (state, index) {
       state.list.splice(index, 1)
+    },
+    updateTodo (state, { index, data }) {
+      const todo = state.list[index]
+      if (!todo) {
+        return
+      }
+
+      state.list[index] = {
+        ...todo,
+        ...data
+      }
     }
   },
   actions: {
@@ -45,6 +51,9 @@ export default build(crud(transList), {
     },
     removeTodo ({ commit }, index) {
       commit('removeTodo', index)
+    },
+    updateTodo ({ commit }, { index, data }) {
+      commit('updateTodo', { index, data })
     },
     setData ({ commit }, todo) {
       commit('setData', todo)

@@ -1,0 +1,7 @@
+@function px2em($px) {
+  @return $px / 16 * 1em;
+}
+
+@function px2rem($px) {
+  @return $px / 16 * 1rem;
+}

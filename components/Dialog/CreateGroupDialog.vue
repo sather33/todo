@@ -4,7 +4,7 @@
       v-form(@submit.prevent="handleCreate")
         v-card-title Create New Group
         v-card-text
-          v-text-field.create-group(v-model="categoryLabel", solo, light, :messages="messages")
+          v-text-field.create-group(v-model="categoryLabel", solo, light, autofocus, :messages="messages")
         v-card-actions
           v-btn(color="grey darken-1", @click="handleClose") Cancel
           v-btn(color="green darken-1", type="submit") Submit

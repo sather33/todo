@@ -25,10 +25,6 @@
       }
     },
 
-    mounted () {
-      console.log('this.data', this.data)
-    },
-
     methods: {
       ...mapActions({
         setData: 'todos/setData',

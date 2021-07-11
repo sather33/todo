@@ -26,7 +26,8 @@ export default {
   styleResources: {
     scss: [
       '~/assets/sass/variables.scss',
-      '~/assets/sass/mixins.scss'
+      '~/assets/sass/_mixins.scss',
+      '~/assets/sass/_helpers.scss'
     ]
   },
 

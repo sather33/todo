@@ -35,7 +35,7 @@
       return {
         isOpen: false,
         drawer: true,
-        selectedItem: 1
+        selectedItem: 0
       }
     },
 

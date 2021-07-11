@@ -1,13 +1,18 @@
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   computed: {
+    ...mapState('todos', ['list']),
     ...mapGetters({
-      list: 'todos/list',
+      count: 'hook/count',
       currentCategoryId: 'category/currentCategoryId'
     }),
     todoList () {
-      return this.list.map((item) => {
+      if (this.count < 0) {
+        return []
+      }
+
+      return this.list.map((item, index) => {
         if (item.category !== this.currentCategoryId) {
           return
         }
@@ -16,11 +21,15 @@ export default {
           return
         }
 
-        return item
+        return { ...item, index }
       }).filter(i => i)
     },
     completeList () {
-      return this.list.map((item) => {
+      if (this.count < 0) {
+        return []
+      }
+
+      return this.list.map((item, index) => {
         if (item.category !== this.currentCategoryId) {
           return
         }
@@ -29,7 +38,7 @@ export default {
           return
         }
 
-        return item
+        return { ...item, index }
       }).filter(i => i)
     }
   }
