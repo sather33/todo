@@ -8,7 +8,7 @@ const normalizeTransform = (transform) => {
   return data => data
 }
 
-const removeId = (list, id) => {
+export const removeId = (list, id) => {
   return _.cloneDeep(list).filter((item) => {
     if (item.id === id) {
       return false

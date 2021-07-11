@@ -1,7 +1,7 @@
 <template lang="pug">
   .index-page
     client-only
-      .title-block
+      .title-block(v-if="this.currentCategoryId")
         .title-edit-block
           v-form.edit-form(v-if="isEdit", @submit.prevent="handleUpdateNewCategoryLabel")
             v-text-field(:value="categoryLabel", @input="updateNewCategoryLabel")
@@ -63,6 +63,12 @@
         updateCategoryLabel: 'category/updateCategoryLabel'
       }),
       handleCreateTodo () {
+        if (!this.currentCategoryId) {
+          this.newTodo = null
+          this.$alert('Please create group.')
+          return
+        }
+
         const data = {
           id: uuidv4(),
           label: this.newTodo,

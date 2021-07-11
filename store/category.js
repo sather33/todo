@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import build from '~/libs/store/build'
-import crud from '~/libs/store/crud'
+import crud, { removeId } from '~/libs/store/crud'
 
 export default build(crud(), {
   state: {
@@ -29,6 +29,15 @@ export default build(crud(), {
           label
         }
       })
+    },
+    removeCategory (state, id) {
+      state.list = removeId(state.list, id)
+      if (state.list.length) {
+        state.currentCategoryId = state.list[0].id
+        return
+      }
+
+      state.currentCategoryId = ''
     }
   },
   actions: {
@@ -49,7 +58,7 @@ export default build(crud(), {
       commit('setCurrentCategoryId', categoryId)
     },
     removeCategory ({ commit }, id) {
-      commit('removeDataFromList', id)
+      commit('removeCategory', id)
     },
     updateCategoryLabel ({ commit }, { id, label }) {
       commit('updateCategoryLabel', { id, label })
