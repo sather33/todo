@@ -1,10 +1,11 @@
 <template lang="pug">
   .complete-list(v-if="completeList.length")
     .title Complete
-    todo-item(
-      :key="item.id",
-      v-bind="item",
-      v-for="item in completeList")
+    transition-group(name="slide-fade")
+      todo-item(
+        :key="item.id",
+        v-bind="item",
+        v-for="item in completeList")
 </template>
 
 <script>

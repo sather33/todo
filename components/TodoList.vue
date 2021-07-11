@@ -1,9 +1,10 @@
 <template lang="pug">
   .todo-list(v-if="todoList.length")
-    todo-item(
-      :key="item.id",
-      v-bind="item",
-      v-for="item in todoList")
+    transition-group(name="slide-fade")
+      todo-item(
+        :key="item.id",
+        v-bind="item",
+        v-for="item in todoList")
 </template>
 
 <script>
