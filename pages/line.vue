@@ -1,5 +1,5 @@
 <template lang="pug">
-  section
+  section.line-page
     .info {{ profile }}
 </template>
 
@@ -49,3 +49,11 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+.line-page {
+  .info {
+    color: white;
+  }
+}
+</style>
