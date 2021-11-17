@@ -9,6 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@line/liff": "^2.17.0",
     "@nuxtjs/style-resources": "^1.2.0",
     "core-js": "^3.15.1",
     "js-cookie": "^2.2.1",

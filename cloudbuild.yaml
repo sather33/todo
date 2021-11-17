@@ -1,8 +1,8 @@
 steps:
-- name: 'gcr.io/cloud-builders/npm'
+- name: 'gcr.io/cloud-builders/yarn'
   args:
   - install
-- name: 'gcr.io/cloud-builders/npm'
+- name: 'gcr.io/cloud-builders/yarn'
   args:
   - run
   - build
@@ -13,6 +13,7 @@ steps:
   - 'OG_SITE_NAME=${_OG_SITE_NAME}'
   - 'OG_DESCRIPTION=${_OG_DESCRIPTION}'
   - 'API_BASE_URL=${_API_BASE_URL}'
+  - 'LIFF_ID=${_LIFF_ID}'
 - name: 'gcr.io/cloud-builders/gcloud'
   args:
   - app
